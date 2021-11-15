@@ -50,7 +50,7 @@ def csv_to_list_of_obj(calls_csv):
 
     # print(temp )
     return calls
- 
+
 
 def insertDataCall_and_CalcTime(elv, calls):
     id_elev = 0

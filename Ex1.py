@@ -5,19 +5,24 @@ import csv
 from CallForElevator import CallForElevator
 from Elevator import Elevator
 
+global list_of_pass
+list_of_pass = []
 
 def json_to_obj_elev(build_json):
     try:
         with open(build_json, "r+") as f:
             elv = []
+            # arr = []
             # print(type(elv))
             elevator_dict = json.load(f)
             elev_for_obj = elevator_dict["_elevators"]
             # print(e1)
+
+            list_of_pass
             counter = 0
             for k in elev_for_obj:
                 e1 = Elevator(k["_id"], k["_speed"], k["_minFloor"], k["_maxFloor"], k["_closeTime"], k["_openTime"],
-                              k["_startTime"], k["_stopTime"])
+                              k["_startTime"], k["_stopTime"],[])
 
                 # print(e2)
                 # print(type(e2))
@@ -46,11 +51,11 @@ def csv_to_list_of_obj(calls_csv):
         header = next(csv_reader)
         for row in csv_reader:
             c = CallForElevator(elv=str(row[0]), time=float(row[1]), src=int(row[2]), dest=int(row[3]), elv_pos=int(row[4]), alloc=int(row[5]))
-            calls.append(c) 
+            calls.append(c)
 
     # print(temp )
     return calls
- 
+
 
 def insertDataCall_and_CalcTime(elv, calls):
     id_elev = 0
@@ -65,11 +70,29 @@ def insertDataCall_and_CalcTime(elv, calls):
     # for i,j in temp_dict.items():
     #     floor = temp_dict[j]
     #
+    
+def current_pos_elevator(e1,time):
+    if len(e1.arr) == 0:
+        return 0
+    for call in e1.arr:
+
+
 
 
 def insert_zero(calls):
+    b1 = json_to_obj(sys.argv[1])
     for call in calls:
-        call.alloc = 0
+        min_time = sys.maxsize
+        id_elv = 0
+        for elvator in b1.elevators:
+            current_pos = current_pos_elevator(elvator,call.time)
+            if avarge_min_time(current_pos,call,elvator)<min_time:
+                min_time= avargetime(call,elvator)
+                id_elv = elvator.id
+        b1.elevators[id_elv].arr.append(call)
+        call.alloc = id_elv
+    # for call in calls:
+    #     call.alloc = 0
 
 
 def make_out_file(calls, file_name):
@@ -85,6 +108,7 @@ if __name__ == '__main__':
     # print(sys.argv)
     # print(sys.argv[1])
     b1 = json_to_obj(sys.argv[1])
+
     print("Our Building: ")
     print(b1)
     print("---------------")
@@ -94,8 +118,9 @@ if __name__ == '__main__':
     print("------------")
     print("Our Calls")
     c1 = csv_to_list_of_obj(sys.argv[2])
-    print(c1)
+    print(f'before calling insert zero {c1}')
     print("----------------")
     # insertDataCall_and_CalcTime(e1,c1)
     insert_zero(c1)
+    print(f'after calling insert zero {c1}')
     make_out_file(c1, sys.argv[3])

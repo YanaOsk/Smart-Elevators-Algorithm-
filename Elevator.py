@@ -1,5 +1,5 @@
 class Elevator:
-    def __init__(self,id,speed,minFloor,maxFloor,closeTime,openTime,startTime,stopTime, arr):
+    def __init__(self,id,speed,minFloor,maxFloor,closeTime,openTime,startTime,stopTime, arr,lastpos):
 
         self.id = id
         self.speed = speed
@@ -10,6 +10,7 @@ class Elevator:
         self.startTime = startTime
         self.stopTime = stopTime
         self.arr = arr
+        self.lastpos = 0
 
 
     def __str__(self):

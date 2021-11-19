@@ -48,19 +48,7 @@ def csv_to_list_of_obj(calls_csv):
 
     return calls
 
-def insertDataCall_and_CalcTime(elv, calls):
-    id_elev = 0
-    time_arr = []
-    avg = 0
-    min_avg = 0
-    temp_dict = {}
-    for k, v in temp_dict.items():
-        temp_dict[k] = elv[k]
-        temp_dict[v] = calls[v]
-    print(temp_dict)
-    # for i,j in temp_dict.items():
-    #     floor = temp_dict[j]
-    #
+
 
 def allocate_id_to_call(calls , building):
     all_calls_time = []

@@ -1,4 +1,4 @@
-# Ex1
+# Smart Elevators
 
 ## Explanation of the problem: 
 Lifts are not always efficient. There are lots of cases, where people stand and wait a long time for the elevator to reach them and in general for them to reach their destination.
